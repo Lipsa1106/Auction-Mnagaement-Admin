@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateBlog";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                <div class="card">
+                    <div class="card-body">
+                        @foreach (System.Data.DataRow dr in ViewBag.dataBlog.Rows)
+                        {
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Blogger Name</label>
+                                    <input type="text" class="form-control" name="b_name" value="@dr["b_name"].ToString()" >
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="b_title" value="@dr["b_title"].ToString()" >
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                                    <input type="text" class="form-control" name="b_description" value="@dr["b_description"].ToString()" >
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Starting Date</label>
+                                    <input type="date" class="form-control" name="date" value="@dr["b_date"].ToString()">
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Update Blog" />
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

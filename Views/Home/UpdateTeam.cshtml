@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateTeam";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                <div class="card">
+                    <div class="card-body">
+                        @foreach (System.Data.DataRow dr in ViewBag.teamData.Rows)
+                        {
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" name="name" value="@dr["name"].ToString()" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Brand</label>
+                                    <input type="text" class="form-control" name="position" value="@dr["position"].ToString()" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Colour</label>
+                                    <input type="text" class="form-control" name="description" value="@dr["description"].ToString()" required>
+                                </div>
+                                
+                                <input type="submit" class="btn btn-primary" value="Update Product" />
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>>
+

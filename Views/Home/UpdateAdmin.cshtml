@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card w-100 my-3">
+        <div class="card-body p-4 ">
+            <h5 class="card-title fw-semibold mb-4">Admin</h5>
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4 border-bottom  border-top">
+                        <tr>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Avatar</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Email</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Password</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Action</h6>
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (System.Data.DataRow dr in ViewBag.data.Rows)
+                        {
+                            <form method="post">
+                            <tr class="border-bottom">
+                                <td class="border-bottom-0 text-center">
+                                    <img src="~/img/profile/user-1.jpg" width="45" height="45" />
+                                </td>
+                                <td class="border-bottom-0 text-center">
+                                    <input type="email" class="form-control" name="email" value="@dr["email"].ToString()">
+
+                                </td>
+                                <td class="border-bottom-0 text-center">
+                                    <input type="password" class="form-control" name="password" value="@dr["password"].ToString()">
+
+                                </td>
+                                <td class="border-bottom-0 text-center">
+                                    <input type="submit" class="btn btn-primary" value="Update Admin" />
+                                </td>
+
+                            </tr>
+                                
+                            </form>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

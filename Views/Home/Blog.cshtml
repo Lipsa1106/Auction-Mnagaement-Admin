@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Team";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <a asp-controller="Home" asp-action="BlogInsert" class="btn btn-primary">Add Blog</a>
+
+    <div class="well">
+        <div class="media">
+            <div class="row">
+
+                @{
+                    foreach (System.Data.DataRow dr in ViewBag.data.Rows)
+                    {
+                        <div class="col-12 col-lg-4 my-3">
+                            <div style="box-shadow:2px 2px 5px;padding:15px;height:100%">
+                                <div class="pull-left position-relative">
+                                    <img src="~/img/img_2.jpg.webp" alt="Image" class="img-fluid" style="width:100%">
+                                    <p class="position-absolute z-1 m-0" style="bottom:0;right:0;background-color:#ffffff73;color:black">
+                                        @dr["b_date"].ToString()
+
+                                    </p>
+                                </div>
+
+                                <div class="media-body">
+                                    <h4 class="media-heading"> @dr["b_title"].ToString()</h4>
+                                    <p class="text-right">By  @dr["b_name"].ToString()</p>
+                                    <p>
+                                        @dr["b_description"].ToString()
+                                    </p>
+                                    @Html.ActionLink("","DeleteBlog", new {Id = dr["id"].ToString()},new {@class="btn btn-outline-primary fa-solid fa-trash" })
+                                    @Html.ActionLink("","UpdateBlog", new {Id = dr["id"].ToString()},new{@class="btn btn-outline-primary fa-solid fa-pen-to-square"})
+                                </div>
+
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+

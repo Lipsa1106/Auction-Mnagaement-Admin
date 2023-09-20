@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "ContactUs";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+<div class="card w-100 my-3">
+    <div class="card-body p-4 ">
+        <h5 class="card-title fw-semibold mb-4">Recent Users</h5>
+        <div class="table-responsive">
+            <table class="table text-nowrap mb-0 align-middle">
+                <thead class="text-dark fs-4">
+                    <tr>
+                            <th class="border-bottom-0 text-center">
+                            <h6 class="fw-semibold mb-0">First Name</h6>
+                        </th>
+                            <th class="border-bottom-0 text-center">
+                            <h6 class="fw-semibold mb-0">Last Name</h6>
+                        </th>
+                            <th class="border-bottom-0 text-center">
+                            <h6 class="fw-semibold mb-0">Contact</h6>
+                        </th>
+                            <th class="border-bottom-0 text-center">
+                            <h6 class="fw-semibold mb-0">Message</h6>
+                        </th>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Reply</h6>
+                            </th>
+                    </tr>
+
+
+                </thead>
+                <tbody>
+                    @{
+                        foreach (System.Data.DataRow dr in ViewBag.contact.Rows)
+                        {
+                            <tr>
+                                    <td class="border-bottom-0 text-center">
+                                    @dr["f_name"].ToString()
+                                </td>
+                                    <td class="border-bottom-0 text-center">
+                                    @dr["l_name"].ToString()
+                                </td>
+                                    <td class="border-bottom-0 text-center">
+                                    @dr["mobile"].ToString()
+                                </td>
+                                    <td class="border-bottom-0 text-center">
+                                    @dr["message"].ToString()
+                                </td>
+                                    <td class="border-bottom-0 text-center">
+                                        @Html.ActionLink("","ContactSelect", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-reply text-primary" })
+                                    </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+

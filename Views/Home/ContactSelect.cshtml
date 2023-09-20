@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "ContactSelect";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                <div class="card">
+                    <div class="card-body">
+
+                        @foreach (System.Data.DataRow dr in ViewBag.contact.Rows)
+                        {
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="f_name" value="@dr["f_name"].ToString()" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="l_name" value="@dr["l_name"].ToString()" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Email</label>
+                                <input type="text" class="form-control" name="email" value="@dr["email"].ToString()" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Mobile</label>
+                                <input type="text" class="form-control" name="mobile" value="@dr["mobile"].ToString()" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Message</label>
+                                <input type="text" class="form-control" name="message" value="@dr["message"].ToString()" readonly>
+                            </div>
+                        }
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Reply</label>
+                                <input type="text" class="form-control" name="message">
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Reply" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

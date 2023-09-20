@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                <div class="card">
+                    <div class="card-body">
+                        @foreach (System.Data.DataRow dr in ViewBag.data.Rows)
+                        {
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Enter Name</label>
+                                    <input type="text" class="form-control" name="name" value="@dr["name"].ToString()">
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Enter Email</label>
+                                    <input type="email" class="form-control" name="email" value="@dr["email"].ToString()">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Enter Password</label>
+                                    <input type="password" class="form-control" name="password" value="@dr["password"].ToString()">
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Update User"/>
+                            </form>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

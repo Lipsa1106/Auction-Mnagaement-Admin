@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <a asp-controller="Home" asp-action="ProductInsert" class="btn btn-primary">Add Product</a>
+    <div class="card w-100 my-3">
+        <div class="card-body p-4">
+            <h5 class="card-title fw-semibold mb-4">Recent Products</h5>
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle text-center">
+                    <thead class="text-dark fs-4">
+                        <tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Name</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Brand</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Colour</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Description</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Condition</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Price</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Enable</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Action</h6>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (System.Data.DataRow dr in ViewBag.data.Rows)
+                            {
+                                <tr>
+                                    <td class="border-bottom-0">
+                                        @dr["product_name"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+                                       @dr["brand"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        @dr["color"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        @dr["description"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        @dr["condition"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        @dr["price"].ToString()
+                                    </td>
+                                    @if (dr["status"].ToString() == "False")
+                                    {
+                                        
+                                        <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("","Update_Product", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-check text-success" })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("","Update_Product", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-xmark text-danger" })
+                                        </td>
+                                    }
+                                    <td class="border-bottom-0">
+
+                                        @Html.ActionLink("","DeleteProduct", new {Id = dr["id"].ToString()},new {@class="text-danger mx-2 fs-6 fa-solid fa-trash" })
+                                       
+                                        @Html.ActionLink("","UpdateProduct", new {Id = dr["id"].ToString()},new{@class=" fa-solid fs-6 fa-pen-to-square"})
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

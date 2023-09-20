@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Team";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <a asp-controller="Home" asp-action="TeamInsert" class="btn btn-primary">Add Team Member</a>
+    <div class="card w-100 my-3">
+        <div class="card-body p-4 ">
+            <h5 class="card-title fw-semibold mb-4">Recent Users</h5>
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                        <tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Name</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">position</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Description</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Action</h6>
+                            </th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (System.Data.DataRow dr in ViewBag.data.Rows)
+                            {
+                                <tr>
+                                    <td class="border-bottom-0">
+                                        @dr["name"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        @dr["position"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        @dr["description"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0">
+
+                                        @Html.ActionLink("","DeleteTeam", new {Id = dr["id"].ToString()},new {@class="btn btn-outline-primary fa-solid fa-trash" })
+                                       
+                                        @Html.ActionLink("","UpdateTeam", new {Id = dr["id"].ToString()},new{@class="btn btn-outline-primary fa-solid fa-pen-to-square"})
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

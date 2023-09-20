@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "User";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    <a asp-controller="Home" asp-action="insert" class="btn btn-primary">Add User</a>
+        <div class="card w-100 my-3">
+            <div class="card-body p-4 ">
+                <h5 class="card-title fw-semibold mb-4">Recent Users</h5>
+                <div class="table-responsive">
+                    <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4 border-bottom  border-top">
+                            <tr>
+                                <th class="border-bottom-0 text-center">
+                                    <h6 class="fw-semibold mb-0">Name</h6>
+                                </th>
+                            <th class="border-bottom-0 text-center">
+                                    <h6 class="fw-semibold mb-0">Email</h6>
+                                </th>
+                                <th class="border-bottom-0 text-center">
+                                    <h6 class="fw-semibold mb-0">Disable</h6>
+                                </th>
+                            <th class="border-bottom-0 text-center">
+                                    <h6 class="fw-semibold mb-0">Action</h6>
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (System.Data.DataRow dr in ViewBag.data.Rows)
+                                {
+                                <tr class="border-bottom">
+                                    <td class="border-bottom-0 text-center">
+                                            @dr["name"].ToString()
+                                        </td>
+                                    <td class="border-bottom-0 text-center">
+                                            @dr["email"].ToString()
+                                        </td>
+                                        @if(dr["status"].ToString() == "true")
+                                    {
+                                    <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("","Update_status", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-xmark text-danger" })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("","Update_status", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-check text-success" })
+                                        </td>
+                                    }
+                                    <td class="border-bottom-0 text-center">
+                                        @Html.ActionLink("","Delete", new {Id = dr["id"].ToString()},new {@class="text-danger fs-5 fa-solid fa-trash me-2" })
+                                            @Html.ActionLink("","Update", new {Id = dr["id"].ToString()},new{@class=" fa-solid fs-5 fa-pen-to-square"})
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+
