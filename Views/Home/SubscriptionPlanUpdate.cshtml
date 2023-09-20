@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "SubscriptionPlanUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                <div class="card">
+                    <div class="card-body">
+                        @foreach (System.Data.DataRow dr in ViewBag.subscriptionplandata.Rows)
+                        {
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Enter Plan Title</label>
+                                    <input type="text" class="form-control" name="sub_title" value="@dr["sub_title"].ToString()" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Enter Product Type</label>
+                                    <input type="text" class="form-control" name="pkg_desc" value="@dr["pkg_desc"].ToString()">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Enter Number of Product</label>
+                                    <input type="number" class="form-control" name="num_product" value="@dr["num_product"].ToString()">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Enter price</label>
+                                    <input type="text" class="form-control" name="price" value="@dr["price"].ToString()">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Enter Date</label>
+                                    <input type="date" class="form-control" name="p_date" value="@dr["p_date"].ToString()">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Enter Number of Bid</label>
+                                    <input type="number" class="form-control" name="num_bid" value="@dr["num_bid"].ToString()" required>
+                                </div>
+
+                                <input type="submit" class="btn btn-primary" value="Update User" />
+                            </form>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

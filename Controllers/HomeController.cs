@@ -42,7 +42,9 @@ namespace HiTech.Controllers
             if (TempData.Peek("id") != null)
             {
                 DataSet ds = user.allproduct();
+                DataSet bid = user.SelectBidder();
                 ViewBag.data = ds.Tables[0];
+                ViewBag.bid = bid.Tables[0];
                 return View();
             }
             return RedirectToAction("Index");
@@ -122,7 +124,7 @@ namespace HiTech.Controllers
             //TempData["p_image"]= seriallizableString;
             int id = int.Parse((string)TempData.Peek("id"));
             //add.product_image = image.ToString();
-            add.productInsert(add.product_name,id, add.brand, add.color, add.condition, add.description, add.starting_bid, add.price, add.start_time, add.end_time);
+            add.productInsert(add.product_name,id, add.brand, add.color, add.condition, add.description, add.starting_bid, add.price, add.start_time, add.end_time,add.report,add.cart);
             return RedirectToAction("Product");
         }
         [HttpGet]
@@ -304,6 +306,121 @@ namespace HiTech.Controllers
            }
             add.Reply(user_id, add.message);
             return RedirectToAction("ContactUs");
+        }
+        [HttpGet]
+        public IActionResult Ban_user(Admin ad, int id)
+        {
+
+            DataSet ds = ad.select_data(id);
+
+            ViewBag.banuser = ds.Tables[0];
+
+            foreach (System.Data.DataRow row in ViewBag.banuser.Rows)
+            {
+                if (row["report"].ToString() == "False")
+                {
+                    ad.update_Ban("True", id);
+                }
+            }
+
+            return RedirectToAction("User");
+        }
+        
+        [HttpGet]
+        public IActionResult Ban_product(Admin ad, int id)
+        {
+
+            DataSet ds = ad.select_Product(id);
+
+            ViewBag.banuser = ds.Tables[0];
+
+            foreach (System.Data.DataRow row in ViewBag.banuser.Rows)
+            {
+                if (row["report"].ToString() == "False")
+                {
+                    ad.update_Ban_product("True", id);
+                }
+            }
+
+            return RedirectToAction("Product");
+        }
+        [HttpGet]
+        public IActionResult Addtocart_Product(Admin ad, int id)
+        {
+
+            DataSet ds = ad.allproduct_status(id);
+
+            ViewBag.addtocart = ds.Tables[0];
+
+            foreach (System.Data.DataRow row in ViewBag.addtocart.Rows)
+            {
+                if (row["cart"].ToString() == "false")
+                {
+                    ad.addtocart("True", id);
+                }
+            }
+
+            return RedirectToAction("Product");
+        }
+        public IActionResult SubscriptionPlan(Admin ad)
+        {
+           
+            DataSet ds = ad.allSubscription();
+            ViewBag.subscriptionplan = ds.Tables[0];
+            return View();
+        }
+        [HttpGet]
+        public IActionResult SubscriptionPlanInsert()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SubscriptionPlanInsert(Admin ad, int id)
+        {
+            string status = "true";
+            ad.SubscritpionInsert(ad.pkg_desc,ad.num_product,ad.price,ad.p_date, status, ad.sub_title, ad.num_bid);
+            return RedirectToAction("SubscriptionPlan");
+        }
+        [HttpGet]
+        public IActionResult SubscriptionPlanUpdate(Admin ad,int id)
+        {
+
+            DataSet ds = ad.Subscription(id);
+            ViewBag.subscriptionplandata = ds.Tables[0];
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SubscriptionPlanUpdate(Admin user, int id, int a = 0)
+        {
+            user.updateSubscription(user.pkg_desc, user.num_product, user.price, user.p_date,user.sub_title,user.num_bid, id);
+            return RedirectToAction("SubscriptionPlan");
+        }
+        public IActionResult SubscriptionPlanDelete(Admin db, int id = 0)
+        {
+            db.deleteSubscription(id);
+            return RedirectToAction("SubscriptionPlan");
+        }
+        [HttpGet]
+        public IActionResult Update_Plan(Admin ad, int id)
+        {
+
+            DataSet ds = ad.Subscription(id);
+
+            ViewBag.dataStatus = ds.Tables[0];
+
+            foreach (System.Data.DataRow row in ViewBag.dataStatus.Rows)
+            {
+                if (row["status"].ToString() == "true")
+                {
+                    ad.update_Subscription("false", id);
+                }
+                else
+                {
+                    ad.update_Subscription("true", id);
+                }
+            }
+
+            return RedirectToAction("SubscriptionPlan");
         }
     }
 }

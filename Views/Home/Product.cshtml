@@ -13,7 +13,7 @@
                     <thead class="text-dark fs-4">
                         <tr>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Name</h6>
+                                <h6 class="fw-semibold mb-0">Product Name</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Brand</h6>
@@ -31,7 +31,7 @@
                                 <h6 class="fw-semibold mb-0">Price</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Enable</h6>
+                                <h6 class="fw-semibold mb-0">Disabled/Enable</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Action</h6>
@@ -61,17 +61,29 @@
                                     <td class="border-bottom-0">
                                         @dr["price"].ToString()
                                     </td>
+                                    
                                     @if (dr["status"].ToString() == "False")
                                     {
-                                        
                                         <td class="border-bottom-0 text-center">
-                                            @Html.ActionLink("","Update_Product", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-check text-success" })
+                                            @Html.ActionLink("Disabled","Update_Product", new {Id = dr["id"].ToString()},new {@class="bg-danger px-3 py-1 rounded text-light-danger " })
                                         </td>
                                     }
                                     else
                                     {
                                         <td class="border-bottom-0 text-center">
-                                            @Html.ActionLink("","Update_Product", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-xmark text-danger" })
+                                            @Html.ActionLink("Enable","Update_Product", new {Id = dr["id"].ToString()},new { @style="background:#28a745;color:white;padding:0.3rem 1.5rem;border-radius:7px" })
+                                        </td>
+                                    }
+                                    @if (dr["report"].ToString() == "False")
+                                    {
+                                        <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("","Ban_product", new {Id = dr["id"].ToString()},new {@class="fs-6 fa-solid fa-ban text-danger" })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("Reported","Ban_product", new {Id = dr["id"].ToString()},new {@class="bg-danger px-3 py-1 rounded text-light-danger " })
                                         </td>
                                     }
                                     <td class="border-bottom-0">

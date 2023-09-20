@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "SubscriptionPlan";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <a asp-controller="Home" asp-action="SubscriptionPlanInsert" class="btn btn-primary">Add plan</a>
+    <div class="card w-100 my-3">
+        <div class="card-body p-4 ">
+            <h5 class="card-title fw-semibold mb-4">Recent Users</h5>
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4 border-bottom  border-top">
+                        <tr>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Package Title</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Package Description</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Price</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Total product</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Date</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Enable/Disabled</h6>
+                            </th>
+                            <th class="border-bottom-0 text-center">
+                                <h6 class="fw-semibold mb-0">Action</h6>
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (System.Data.DataRow dr in ViewBag.subscriptionplan.Rows)
+                            {
+                                <tr class="border-bottom">
+                                    <td class="border-bottom-0 text-center">
+                                        @dr["sub_title"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0 text-center">
+                                        @dr["pkg_desc"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0 text-center">
+                                        @dr["price"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0 text-center">
+                                        @dr["num_product"].ToString()
+                                    </td>
+                                    <td class="border-bottom-0 text-center">
+                                        @dr["p_date"].ToString()
+                                    </td>
+                                    @if (dr["status"].ToString() == "true")
+                                    {
+                                        <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("Enabled","Update_Plan", new {Id = dr["id"].ToString()},new { @style="background:#28a745;color:white;padding:0.3rem 1.2rem;border-radius:7px" })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="border-bottom-0 text-center">
+                                            @Html.ActionLink("Disabled","Update_Plan", new {Id = dr["id"].ToString()},new {@class="bg-danger px-3 py-1 rounded text-light-danger " })
+                                        </td>
+                                    }
+                                    <td class="border-bottom-0 text-center">
+                                        @Html.ActionLink("","SubscriptionPlanDelete", new {Id = dr["id"].ToString()},new {@class="text-danger fs-5 fa-solid fa-trash me-2" })
+                                        @Html.ActionLink("","SubscriptionPlanUpdate", new {Id = dr["id"].ToString()},new{@class=" fa-solid fs-5 fa-pen-to-square"})
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

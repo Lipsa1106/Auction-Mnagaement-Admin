@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "SubscriptionPlanInsert";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Enter Plan Title</label>
+                                <input type="text" class="form-control" name="sub_title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Enter Plan Description</label>
+                                <input type="text" class="form-control" name="pkg_desc" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Enter Number of Product</label>
+                                <input type="number" class="form-control" name="num_product" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Enter Price</label>
+                                <input type="text" class="form-control" name="price" required>
+                            </div> <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Enter Date</label>
+                                <input type="date" class="form-control" name="p_date" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Enter Number of Bid</label>
+                                <input type="number" class="form-control" name="num_bid" required>
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Add User" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
