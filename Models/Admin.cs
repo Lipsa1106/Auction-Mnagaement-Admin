@@ -313,7 +313,7 @@ namespace HiTech.Models
         }
         public DataSet SelectBidder()
         {
-            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[SubmitBid] ", con);
+            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[SubmitBid1] ", con);
             SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
             DataSet ds = new DataSet();
             dn.Fill(ds);
@@ -345,5 +345,6 @@ namespace HiTech.Models
             con.Open();
             return cmd.ExecuteNonQuery();
         }
+       
     }
 }
