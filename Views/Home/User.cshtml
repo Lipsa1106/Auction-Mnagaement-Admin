@@ -43,13 +43,13 @@
                                     @if (dr["status"].ToString() == "true")
                                     {
                                         <td class="border-bottom-0 text-center">
-                                            @Html.ActionLink("Enabled","Update_status", new {Id = dr["id"].ToString()},new { @style="background:#28a745;color:white;padding:0.3rem 1.2rem;border-radius:7px" })
+                                            @Html.ActionLink("Active user","Update_status", new {Id = dr["id"].ToString()},new { @style="background:#28a745;color:white;padding:0.3rem 1.2rem;border-radius:7px" })
                                         </td>
                                     }
                                     else
                                     {
                                         <td class="border-bottom-0 text-center">
-                                            @Html.ActionLink("Disabled","Update_status", new {Id = dr["id"].ToString()},new {@class="bg-danger px-3 py-1 rounded text-light-danger " })
+                                            @Html.ActionLink("Deactived user","Update_status", new {Id = dr["id"].ToString()},new {@class="bg-danger px-3 py-1 rounded text-light-danger " })
                                         </td>
                                     }
                                     @if (dr["report"].ToString() == "False")

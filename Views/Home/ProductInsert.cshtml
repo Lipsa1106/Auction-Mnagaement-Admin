@@ -10,7 +10,7 @@
                 <h5 class="card-title fw-semibold mb-4">Forms</h5>
                 <div class="card">
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Product Name</label>
                                 <input type="text" class="form-control" name="product_name" required>
@@ -41,15 +41,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Product Image</label>
-                                <input type="file" class="form-control" name="product_image" required>
+                                <input type="file" class="form-control" name="formfile" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Start Time</label>
-                                <input type="date" class="form-control" name="start_time" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">End Time</label>
-                                <input type="date" class="form-control" name="end_time" required>
+                            <div class="row my-2">
+                                <label for="description">Product Type*</label>
+                                <select class="form-select" name="pType" aria-label="Default select example">
+                                    <option selected>Open this for Select Prodcut Type</option>
+                                    <option value="auction">Auction</option>
+                                    <option value="normal">Normal</option>
+                                </select>
                             </div>
                             <input type="submit" class="btn btn-primary" value="Add User" />
                         </form>

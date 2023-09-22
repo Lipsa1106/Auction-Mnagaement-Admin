@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "TeamInsert";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -11,7 +10,7 @@
                 <h5 class="card-title fw-semibold mb-4">Forms</h5>
                 <div class="card">
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name" required>
@@ -24,8 +23,11 @@
                                 <label for="exampleInputPassword1" class="form-label">Description</label>
                                 <input type="text" class="form-control" name="description" required>
                             </div>
-                            
-                            <input type="submit" class="btn btn-primary" value="Add User" />
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Team Image</label>
+                                <input type="file" class="form-control" name="formfile" required>
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Add Member" />
                         </form>
 
                     </div>

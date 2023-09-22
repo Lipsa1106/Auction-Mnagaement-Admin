@@ -5,7 +5,39 @@
 <div class="container-fluid">
     <!--  Row 1 -->
     <div class="row">
-        <div class="col-lg-3 my-4">
+        @{
+            int totalUser = 0;
+            @foreach (System.Data.DataRow user in ViewBag.TotalUser.Rows)
+            {
+                totalUser++;
+            }
+            int EnableProduct = 0;
+            foreach (System.Data.DataRow dr in ViewBag.EnableProduct.Rows)
+            {
+                EnableProduct++;
+            }
+            int DisableProduct = 0;
+            foreach (System.Data.DataRow dr in ViewBag.DisableProduct.Rows)
+            {
+                DisableProduct++;
+            }
+            int LiveAuction = 0;
+            foreach (System.Data.DataRow dr in ViewBag.LiveAuction.Rows)
+            {
+                LiveAuction++;
+            }
+            int DeadAuction = 0;
+            foreach (System.Data.DataRow dr in ViewBag.DeadAuction.Rows)
+            {
+                DeadAuction++;
+            }
+            int TotalWinner = 0;
+            foreach (System.Data.DataRow dr in ViewBag.TotalWinner.Rows)
+            {
+                TotalWinner++;
+            }
+        }
+        <div class="col-lg-4 my-4">
             <div class="p-3" style="background-color:#f5f5f5">
                 <div class="border-bottom" style="border-color:lightgray !important">
                     <div class="d-flex justify-content-between py-3">
@@ -14,12 +46,84 @@
                         </div>
                         <div class="content">
                             <span class="text-primary fw-bold fs-6">Total User</span>
-                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">4</div>
+                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">@totalUser</div>
                         </div>
                     </div>
                 </div>
                 <div class="py-2">
-                    <a asp-action="User" asp-controller="Admin"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
+                    <a asp-action="User" asp-controller="Home"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 my-4">
+            <div class="p-3" style="background-color:#f5f5f5">
+                <div class="border-bottom" style="border-color:lightgray !important">
+                    <div class="d-flex justify-content-between py-3">
+                        <div class="icon bg-primary" style="padding:17px">
+                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
+                        </div>
+                        <div class="content">
+                            <span class="text-primary fw-bold fs-6">Total Approved Product</span>
+                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">@EnableProduct</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-2">
+                    <a asp-action="Product" asp-controller="Home"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 my-4">
+            <div class="p-3" style="background-color:#f5f5f5">
+                <div class="border-bottom" style="border-color:lightgray !important">
+                    <div class="d-flex justify-content-between py-3">
+                        <div class="icon bg-primary" style="padding:17px">
+                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
+                        </div>
+                        <div class="content">
+                            <span class="text-primary fw-bold fs-6">Total Rejected Product</span>
+                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">@DisableProduct</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-2">
+                    <a asp-action="Product" asp-controller="Home"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 my-4">
+            <div class="p-3" style="background-color:#f5f5f5">
+                <div class="border-bottom" style="border-color:lightgray !important">
+                    <div class="d-flex justify-content-between py-3">
+                        <div class="icon bg-primary" style="padding:17px">
+                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
+                        </div>
+                        <div class="content">
+                            <span class="text-primary fw-bold fs-6">Total Live Auction</span>
+                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">@LiveAuction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-2">
+                    <a asp-action="Product" asp-controller="Home"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 my-4">
+            <div class="p-3" style="background-color:#f5f5f5">
+                <div class="border-bottom" style="border-color:lightgray !important">
+                    <div class="d-flex justify-content-between py-3">
+                        <div class="icon bg-primary" style="padding:17px">
+                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
+                        </div>
+                        <div class="content">
+                            <span class="text-primary fw-bold fs-6">Total Past Auction</span>
+                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">@DeadAuction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-2">
+                    <a asp-action="User" asp-controller="Home"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
                 </div>
             </div>
         </div>
@@ -31,103 +135,13 @@
                             <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
                         </div>
                         <div class="content">
-                            <span class="text-primary fw-bold fs-6">Total User</span>
-                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">4</div>
+                            <span class="text-primary fw-bold fs-6">Total Winner</span>
+                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">@TotalWinner</div>
                         </div>
                     </div>
                 </div>
                 <div class="py-2">
-                    <a asp-action="User" asp-controller="Admin"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 my-4">
-            <div class="p-3" style="background-color:#f5f5f5">
-                <div class="border-bottom" style="border-color:lightgray !important">
-                    <div class="d-flex justify-content-between py-3">
-                        <div class="icon bg-primary" style="padding:17px">
-                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
-                        </div>
-                        <div class="content">
-                            <span class="text-primary fw-bold fs-6">Total User</span>
-                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">4</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-2">
-                    <a asp-action="User" asp-controller="Admin"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 my-4">
-            <div class="p-3" style="background-color:#f5f5f5">
-                <div class="border-bottom" style="border-color:lightgray !important">
-                    <div class="d-flex justify-content-between py-3">
-                        <div class="icon bg-primary" style="padding:17px">
-                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
-                        </div>
-                        <div class="content">
-                            <span class="text-primary fw-bold fs-6">Total User</span>
-                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">4</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-2">
-                    <a asp-action="User" asp-controller="Admin"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="p-3" style="background-color:#f5f5f5">
-                <div class="border-bottom" style="border-color:lightgray !important">
-                    <div class="d-flex justify-content-between py-3">
-                        <div class="icon bg-primary" style="padding:17px">
-                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
-                        </div>
-                        <div class="content">
-                            <span class="text-primary fw-bold fs-6">Total User</span>
-                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">4</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-2">
-                    <a asp-action="User" asp-controller="Admin"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="p-3" style="background-color:#f5f5f5">
-                <div class="border-bottom" style="border-color:lightgray !important">
-                    <div class="d-flex justify-content-between py-3">
-                        <div class="icon bg-primary" style="padding:17px">
-                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
-                        </div>
-                        <div class="content">
-                            <span class="text-primary fw-bold fs-6">Total User</span>
-                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">4</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-2">
-                    <a asp-action="User" asp-controller="Admin"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="p-3" style="background-color:#f5f5f5">
-                <div class="border-bottom" style="border-color:lightgray !important">
-                    <div class="d-flex justify-content-between py-3">
-                        <div class="icon bg-primary" style="padding:17px">
-                            <i class="fa-solid fa-user" style="font-size:20px;color:white"></i>
-                        </div>
-                        <div class="content">
-                            <span class="text-primary fw-bold fs-6">Total User</span>
-                            <br /><div class="d-flex justify-content-end fs-5 fw-blod">4</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-2">
-                    <a asp-action="User" asp-controller="Admin"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
+                    <a asp-action="Winner" asp-controller="Home"><i class="fa-solid fa-eye text-primary"></i><span class="text-dark mx-2">View more Details</span></a>
                 </div>
             </div>
         </div>

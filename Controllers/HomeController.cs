@@ -1,6 +1,8 @@
 ﻿using HiTech.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using Microsoft.Net.Http.Headers;
 
 namespace HiTech.Controllers
 {
@@ -43,8 +45,20 @@ namespace HiTech.Controllers
             {
                 DataSet ds = user.allproduct();
                 DataSet bid = user.SelectBidder();
+                DataSet us = user.user();
+                DataSet En = user.allEnableProduct();
+                DataSet Ds = user.allDisabledProduct();
+                DataSet li = user.liveAuction();
+                DataSet De = user.DeadAuction();
+                DataSet Wi = user.totalWinner();
                 ViewBag.data = ds.Tables[0];
                 ViewBag.bid = bid.Tables[0];
+                ViewBag.TotalUser = us.Tables[0];
+                ViewBag.EnableProduct = En.Tables[0];
+                ViewBag.DisableProduct = Ds.Tables[0];
+                ViewBag.LiveAuction = li.Tables[0];
+                ViewBag.DeadAuction = De.Tables[0];
+                ViewBag.TotalWinner = Wi.Tables[0];
                 return View();
             }
             return RedirectToAction("Index");
@@ -76,6 +90,13 @@ namespace HiTech.Controllers
         {
             DataSet dataSet = user.select_data(id);
             ViewBag.data = dataSet.Tables[0];
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Winner(Admin user)
+        {
+            DataSet dataSet = user.totalWinner();
+            ViewBag.TotalWinner = dataSet.Tables[0];
             return View();
         }
         [HttpPost]
@@ -112,19 +133,20 @@ namespace HiTech.Controllers
             return View();
         }
         [HttpPost]
-        public  IActionResult ProductInsert(Admin add)
+        public async Task<IActionResult> ProductInsert(Admin add, IFormFile formFile)
         {
-            //var image = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim();
-            //var path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","NewProduct",formFile.FileName);
-            //using (System.IO.Stream stream = new FileStream(path, FileMode.Create))
-            //{
-            //    await formFile.CopyToAsync(stream);
-            //}
-            //string seriallizableString = image.ToString();
-            //TempData["p_image"]= seriallizableString;
+            var image = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Products", formFile.FileName);
+            using (System.IO.Stream stream = new FileStream(path, FileMode.Create))
+            {
+                await formFile.CopyToAsync(stream);
+            }
+            string seriallizableString = image.ToString();
+            TempData["p_image"] = seriallizableString;
+            add.ProductImage = image.ToString();
             int id = int.Parse((string)TempData.Peek("id"));
             //add.product_image = image.ToString();
-            add.productInsert(add.product_name,id, add.brand, add.color, add.condition, add.description, add.starting_bid, add.price, add.start_time, add.end_time,add.report,add.cart);
+            add.productInsert(add.product_name, id, add.brand, add.color, add.condition, add.description, add.starting_bid, add.price, add.PType, add.ProductImage);
             return RedirectToAction("Product");
         }
         [HttpGet]
@@ -165,9 +187,18 @@ namespace HiTech.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult TeamInsert(Admin add)
+        public async Task<IActionResult> TeamInsert(Admin add, IFormFile formFile)
         {
-            add.teamInsert(add.name, add.position, add.description);
+            var image = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Products", formFile.FileName);
+            using (System.IO.Stream stream = new FileStream(path, FileMode.Create))
+            {
+                await formFile.CopyToAsync(stream);
+            }
+            string seriallizableString = image.ToString();
+            TempData["T_image"] = seriallizableString;
+            add.teamImage = image.ToString();
+            add.teamInsert(add.name, add.position, add.description,add.teamImage);
             return RedirectToAction("Team");
         }
         public IActionResult DeleteTeam(Admin db, int id = 0)
@@ -199,9 +230,18 @@ namespace HiTech.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult BlogInsert(Admin add)
+        public async Task<IActionResult> BlogInsert(Admin add, IFormFile formFile)
         {
-            add.bloginsert(add.b_title, add.b_description, add.b_name,add.date);
+                var image = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim();
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Products", formFile.FileName);
+                using (System.IO.Stream stream = new FileStream(path, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(stream);
+                }
+                string seriallizableString = image.ToString();
+                TempData["B_image"] = seriallizableString;
+                add.blogImg = image.ToString();
+                add.bloginsert(add.b_title, add.b_description, add.b_name,add.date,add.blogImg);
             return RedirectToAction("Blog");
         }
         public IActionResult DeleteBlog(Admin db, int id = 0)

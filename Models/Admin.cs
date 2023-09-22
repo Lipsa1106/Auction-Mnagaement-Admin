@@ -7,7 +7,7 @@ namespace HiTech.Models
 {
     public class Admin
     {
-        SqlConnection con = new SqlConnection("Data Source=.\\SQLExpress;Database=hi-tech;User Id=sa;pwd=palak@123");
+        SqlConnection con = new SqlConnection("Data Source=.\\SQLExpress;Database=hi-tech;User Id=sa;pwd=336633");
         public string name { get; set; }
         public string position { get; set; }
         public string email { get; set; }
@@ -20,7 +20,7 @@ namespace HiTech.Models
         public string condition { get; set; }
         public string description { get; set; }
         public string starting_bid { get; set; }
-        public string product_image { get; set; }
+        public string ProductImage { get; set; }
         public string start_time { get; set; }
         public string end_time { get; set; }
         public string title { get; set; }
@@ -36,7 +36,10 @@ namespace HiTech.Models
         public int num_product { get; set; }
         public string p_date { get; set; }
         public int num_bid { get; set; }
+        public string PType { get; set; }
+        public string teamImage { get; set; }
         public string sub_title { get;set; }
+        public string blogImg { get;set; }
         public DataSet login(string email, string password)
         {
             SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[AdminLogin] where email='" + email + "' and password='" + password + "'", con);
@@ -45,20 +48,6 @@ namespace HiTech.Models
             DataSet ds = new DataSet();
             dn.Fill(ds);
             return ds;
-        }
-        public DataSet selectforgotPassword(int id)
-        {
-            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[AdminLogin] where id='" + id + "'", con);
-            SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
-            DataSet ds = new DataSet();
-            dn.Fill(ds);
-            return ds;
-        }
-        public int forgotPassword(string password, int id)
-        {
-            SqlCommand cmd = new SqlCommand("update [dbo].[AdminLogin] set password='" + password + "' where id='" + id + "'", con);
-            con.Open();
-            return cmd.ExecuteNonQuery();
         }
         public DataSet user()
         {
@@ -96,9 +85,10 @@ namespace HiTech.Models
             return cmd.ExecuteNonQuery();
 
         }
-        public int productInsert(string name, int id, string brand, string color, string conditin, string des, string bid, string price, string start, string end, string report, string cart)
+        public int productInsert(string name, int id, string brand, string color, string conditin, string des, string bid, string price, string pType, string image)
         {
-            SqlCommand cmd = new SqlCommand("insert into [dbo].[Table_1] (product_name,user_id,brand,color,condition,description,starting_bid,price,start_time,end_time,status,report,cart)values('" + name + "','" + id + "','" + brand + "','" + color + "','" + conditin + "','" + des + "','" + bid + "','" + price + "','" + start + "','" + end + "','" + false + "','" + "False" + "','" + "false" + "')", con);
+            SqlCommand cmd = new SqlCommand("insert into [dbo].[Table_1] (product_name,user_id,brand,color,condition,description,starting_bid,price,status,report,auctionLive,pType,p_image)values('" + name + "','" + id + "','" + brand + "','" + color + "','" + conditin + "','" + des + "','" + bid + "','" + price + "','" + false + "','" + "False" + "','" +
+                "true" + "','" + pType + "','" + image + "')", con);
             con.Open();
             return cmd.ExecuteNonQuery();
 
@@ -120,6 +110,46 @@ namespace HiTech.Models
         public DataSet allproduct()
         {
             SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[Table_1]", con);
+            SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            dn.Fill(ds);
+            return ds;
+        }
+        public DataSet allEnableProduct()
+        {
+            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[Table_1] where status = '" + "True" + "'", con);
+            SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            dn.Fill(ds);
+            return ds;
+        }
+        public DataSet allDisabledProduct()
+        {
+            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[Table_1] where status = '" + "false" + "'", con);
+            SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            dn.Fill(ds);
+            return ds;
+        }
+        public DataSet liveAuction()
+        {
+            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[Table_1] where auctionLive = '" + "True" + "'", con);
+            SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            dn.Fill(ds);
+            return ds;
+        }
+        public DataSet DeadAuction()
+        {
+            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[Table_1] where auctionLive = '" + "false" + "'", con);
+            SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            dn.Fill(ds);
+            return ds;
+        }
+        public DataSet totalWinner()
+        {
+            SqlCommand sqlCommand = new SqlCommand("select * from [dbo].[SubmitBid1] where winner = '" + "True" + "'", con);
             SqlDataAdapter dn = new SqlDataAdapter(sqlCommand);
             DataSet ds = new DataSet();
             dn.Fill(ds);
@@ -169,9 +199,9 @@ namespace HiTech.Models
             dn.Fill(ds);
             return ds;
         }
-        public int teamInsert(string name, string position, string des)
+        public int teamInsert(string name, string position, string des,string image)
         {
-            SqlCommand cmd = new SqlCommand("insert into [dbo].[AboutUs] (name,position,description) values('" + name + "','" + position + "','" + description + "')", con);
+            SqlCommand cmd = new SqlCommand("insert into [dbo].[AboutUs] (name,position,description,image) values('" + name + "','" + position + "','" + des + "','"+image+"')", con);
             con.Open();
             return cmd.ExecuteNonQuery();
 
@@ -212,9 +242,9 @@ namespace HiTech.Models
             dn.Fill(ds);
             return ds;
         }
-        public int bloginsert(string title, string description, string name, string date)
+        public int bloginsert(string title, string description, string name, string date,string img)
         {
-            SqlCommand cmd = new SqlCommand("insert into [dbo].[Blog] (b_title,b_description,b_name,b_date) values('" + title + "','" + description + "','" + name + "','" + date + "')", con);
+            SqlCommand cmd = new SqlCommand("insert into [dbo].[Blog] (b_title,b_description,b_name,b_date,img) values('" + title + "','" + description + "','" + name + "','" + date + "','"+img+"')", con);
             con.Open();
             return cmd.ExecuteNonQuery();
 
