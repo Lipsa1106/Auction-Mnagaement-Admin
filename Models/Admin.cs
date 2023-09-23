@@ -171,9 +171,9 @@ namespace HiTech.Models
             dn.Fill(ds);
             return ds;
         }
-        public int updateproduct(string name, int id, string brand, string color, string conditin, string des, string bid, string price, string start, string end, int pid)
+        public int updateproduct(string name, string brand, string color, string conditin, string des, string bid, string price, int pid)
         {
-            SqlCommand cmd = new SqlCommand("update [dbo].[Table_1] set product_name='" + name + "',brand='" + brand + "',color='" + color + "',condition='" + conditin + "',description='" + des + "',starting_bid='" + bid + "',price='" + price + "',start_time='" + start + "',end_time='" + end + "' where id='" + pid + "'", con);
+            SqlCommand cmd = new SqlCommand("update [dbo].[Table_1] set product_name='" + name + "',brand='" + brand + "',color='" + color + "',condition='" + conditin + "',description='" + des + "',starting_bid='" + bid + "',price='" + price + "' where id='" + pid + "'", con);
             con.Open();
             return cmd.ExecuteNonQuery();
         }

@@ -150,17 +150,16 @@ namespace HiTech.Controllers
             return RedirectToAction("Product");
         }
         [HttpGet]
-        public IActionResult UpdateProduct(Admin user, int id)
+        public IActionResult UpdateProduct(Admin db, int id)
         {
-            DataSet dataSet = user.select_Product(id);
+            DataSet dataSet = db.select_Product(id);
             ViewBag.Product = dataSet.Tables[0];
             return View();
         }
         [HttpPost]
         public IActionResult UpdateProduct(Admin add, int id, int a = 0)
         {
-            int user_id = 1001;
-            add.updateproduct(add.product_name, user_id,add.brand, add.color, add.condition, add.description, add.starting_bid, add.price, add.start_time, add.end_time,id);
+            add.updateproduct(add.product_name, add.brand, add.color, add.condition, add.description, add.starting_bid, add.price, id);
             return RedirectToAction("Product");
         }
         public IActionResult DeleteProduct(Admin db, int id = 0)
